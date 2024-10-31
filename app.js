@@ -39,6 +39,7 @@ app.use(cors()); // Enable CORS for all origins during development
 app.use(helmet()); // Use helmet to set security-related HTTP headers
 app.use(express.json()); // Parse JSON request bodies
 app.use(cookieParser()); // Use cookie-parser to parse cookies
+app.use(validationResult());
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies (if needed)
 // Use express-session middleware to manage sessions
 app.use(
