@@ -1,5 +1,5 @@
 const express = require("express"); // import express library from node_modules
-const connectDB = require("./config/db"); // Import database connection
+const connectDB = require("./config/db.config"); // Import database connection
 const dotenv = require("dotenv"); // importing dotenv from node_module
 const cors = require("cors"); // Import CORS middleware
 const helmet = require("helmet"); // Import helmet for security
@@ -61,16 +61,16 @@ const authLimiter = rateLimit({
 app.use("/api/auth/", authLimiter); // Apply rate limiting to authentication routes
 
 // Import routes
-const authRoutes = require("./routes/auth.route");
+const userRoutes = require("./routes/user.route");
 const productRoutes = require("./routes/product.route");
 const cartRoutes = require("./routes/cart.route");
 const orderRoutes = require("./routes/order.route");
 
 // Use routes
-app.use("/api/auth", authRoutes); // User authentication routes
-app.use("/api/products", productRoutes); // Product management routes
-app.use("/api/cart", cartRoutes); // Shopping cart routes
-app.use("/api/orders", orderRoutes); // Order management routes
+app.use(userRoutes); // User authentication routes
+app.use(productRoutes); // Product management routes
+app.use(cartRoutes); // Shopping cart routes
+app.use(orderRoutes); // Order management routes
 
 // Centralized error handling middleware
 app.use((err, req, res, next) => {
